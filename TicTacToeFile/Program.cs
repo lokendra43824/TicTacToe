@@ -26,6 +26,7 @@ namespace TicTacToeGame
             {
                 playVal = t.MakeAMove(board, pLetter);
             }
+            t.WhoWon(board, pLetter, cLetter);
 
         }
     }
@@ -103,13 +104,12 @@ namespace TicTacToeGame
             bool playVal = true;
             Console.WriteLine("Want to play again? (Y/N)");
             char playAgain = Convert.ToChar(Console.ReadLine());
-            if (playAgain == 'N')
+            if (playAgain.Equals('N'))
             {
                 playVal = false;
             }
 
             return playVal;
-
         }
 
         public void FirstPlayToss()
@@ -142,8 +142,54 @@ namespace TicTacToeGame
             }
         }
 
+        public bool CheckIsWinner(char[] board, char playLetter)
+        {
+            bool isWinner = false;
+            for (int i = 1; i < 8;)
+            {
+                if (board[i].Equals(playLetter) && board[i + 1].Equals(playLetter) && board[i + 2].Equals(playLetter))
+                {
+                    isWinner = true;
+                }
+                i += 3;
+            }
+            for (int i = 1; i < 4; i++)
+            {
+                if (board[i].Equals(playLetter) && board[i + 3].Equals(playLetter) && board[i + 3].Equals(playLetter))
+                {
+                    isWinner = true;
+                }
+            }
+            if (board[1].Equals(playLetter) && board[5].Equals(playLetter) && board[9].Equals(playLetter))
+            {
+                isWinner = true;
+            }
+            if (board[3].Equals(playLetter) && board[5].Equals(playLetter) && board[7].Equals(playLetter))
+            {
+                isWinner = true;
+            }
+
+            return isWinner;
+        }
+
+        public void WhoWon(char[] board, char pLetter, char cLetter)
+        {
+            bool checkPlayerWinner = CheckIsWinner(board, pLetter);
+            bool checkComputerWinner = CheckIsWinner(board, cLetter);
+            if (checkPlayerWinner == true)
+            {
+                Console.WriteLine("YOU WON!!!");
+            }
+            if (checkComputerWinner == true)
+            {
+                Console.WriteLine("Computer Won!");
+            }
+            else if (checkComputerWinner == false && checkPlayerWinner == false)
+            {
+                Console.WriteLine("This is a Tie");
+            }
+
+        }
+
     }
-
-
-
 }
