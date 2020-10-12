@@ -1,0 +1,13 @@
+C:\Users\NAGENDRA AND JANAKI\source\repos\TicTacToeFile\TicTacToeFile\bin\Debug\netcoreapp3.1\TicTacToeFile.exe
+C:\Users\NAGENDRA AND JANAKI\source\repos\TicTacToeFile\TicTacToeFile\bin\Debug\netcoreapp3.1\TicTacToeFile.deps.json
+C:\Users\NAGENDRA AND JANAKI\source\repos\TicTacToeFile\TicTacToeFile\bin\Debug\netcoreapp3.1\TicTacToeFile.runtimeconfig.json
+C:\Users\NAGENDRA AND JANAKI\source\repos\TicTacToeFile\TicTacToeFile\bin\Debug\netcoreapp3.1\TicTacToeFile.runtimeconfig.dev.json
+C:\Users\NAGENDRA AND JANAKI\source\repos\TicTacToeFile\TicTacToeFile\bin\Debug\netcoreapp3.1\TicTacToeFile.dll
+C:\Users\NAGENDRA AND JANAKI\source\repos\TicTacToeFile\TicTacToeFile\bin\Debug\netcoreapp3.1\TicTacToeFile.pdb
+C:\Users\NAGENDRA AND JANAKI\source\repos\TicTacToeFile\TicTacToeFile\obj\Debug\netcoreapp3.1\TicTacToeFile.csprojAssemblyReference.cache
+C:\Users\NAGENDRA AND JANAKI\source\repos\TicTacToeFile\TicTacToeFile\obj\Debug\netcoreapp3.1\TicTacToeFile.AssemblyInfoInputs.cache
+C:\Users\NAGENDRA AND JANAKI\source\repos\TicTacToeFile\TicTacToeFile\obj\Debug\netcoreapp3.1\TicTacToeFile.AssemblyInfo.cs
+C:\Users\NAGENDRA AND JANAKI\source\repos\TicTacToeFile\TicTacToeFile\obj\Debug\netcoreapp3.1\TicTacToeFile.csproj.CoreCompileInputs.cache
+C:\Users\NAGENDRA AND JANAKI\source\repos\TicTacToeFile\TicTacToeFile\obj\Debug\netcoreapp3.1\TicTacToeFile.dll
+C:\Users\NAGENDRA AND JANAKI\source\repos\TicTacToeFile\TicTacToeFile\obj\Debug\netcoreapp3.1\TicTacToeFile.pdb
+C:\Users\NAGENDRA AND JANAKI\source\repos\TicTacToeFile\TicTacToeFile\obj\Debug\netcoreapp3.1\TicTacToeFile.genruntimeconfig.cache
