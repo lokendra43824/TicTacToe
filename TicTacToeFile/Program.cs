@@ -11,48 +11,63 @@ namespace TicTacToeGame
         {
             Console.WriteLine("Hello, Welcome to TicTacToeGame");
             TicTacToe t = new TicTacToe();
-            char[] board = t.CreateBoard();
+            bool playAgain = true;
 
-
-            char pLetter = t.ChooseLetter();
-            char cLetter = 'X';
-            if (pLetter.Equals('X'))
+            while (playAgain)
             {
-                cLetter = 'O';
-            }
-            Console.WriteLine("Player's Letter = " + pLetter);
-            Console.WriteLine("Computer's Letter = " + cLetter);
-            t.PrintBoard(board);
-
-            Player p = t.FirstPlayToss();
-
-            bool gameOver = false;
-            GameStatus gstatus = t.CheckCurrentStatus(board, pLetter, cLetter);
-
-            while (!gameOver)
-            {
-                if (p == Player.USER)
+                char[] board = t.CreateBoard();
+                char pLetter = t.ChooseLetter();
+                char cLetter = 'X';
+                if (pLetter.Equals('X'))
                 {
-                    t.MakePlayerMove(board, pLetter);
-                    gstatus = t.CheckCurrentStatus(board, pLetter, cLetter);
-                    p = Player.COMPUTER;
+                    cLetter = 'O';
+                }
+                Console.WriteLine("Player's Letter = " + pLetter);
+                Console.WriteLine("Computer's Letter = " + cLetter);
+                t.PrintBoard(board);
+
+                Player p = t.FirstPlayToss();
+
+                bool gameOver = false;
+                GameStatus gstatus = t.CheckCurrentStatus(board, pLetter, cLetter);
+
+                while (!gameOver)
+                {
+                    if (p == Player.USER)
+                    {
+                        t.MakePlayerMove(board, pLetter);
+                        gstatus = t.CheckCurrentStatus(board, pLetter, cLetter);
+                        p = Player.COMPUTER;
+                    }
+                    else
+                    {
+                        t.MakeComputerMove(board, cLetter, pLetter);
+                        gstatus = t.CheckCurrentStatus(board, pLetter, cLetter);
+                        p = Player.USER;
+                    }
+
+                    if (gstatus != GameStatus.CONTINUE)
+                    {
+                        gameOver = true;
+                    }
+                }
+
+                if (gstatus == GameStatus.WON)
+                {
+                    Player k = t.WhoWon(board, pLetter, cLetter);
+                }
+
+                Console.WriteLine("Do you want to play again(Y/N)");
+                string a = Console.ReadLine();
+                if (a[0] == 'Y')
+                {
+                    playAgain = true;
                 }
                 else
                 {
-                    t.MakeComputerMove(board, cLetter, pLetter);
-                    gstatus = t.CheckCurrentStatus(board, pLetter, cLetter);
-                    p = Player.USER;
+                    playAgain = false;
                 }
 
-                if (gstatus != GameStatus.CONTINUE)
-                {
-                    gameOver = true;
-                }
-            }
-
-            if (gstatus == GameStatus.WON)
-            {
-                t.WhoWon(board, pLetter, cLetter);
             }
         }
     }
