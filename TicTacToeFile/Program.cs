@@ -27,6 +27,7 @@ namespace TicTacToeGame
 
 
             Player p = t.FirstPlayToss();
+
             if (p == Player.USER)
             {
                 t.MakePlayerMove(board, pLetter);
@@ -133,12 +134,29 @@ namespace TicTacToeGame
                 }
                 else
                 {
-                    Random rn = new Random();
-                    pos = rn.Next(1, 10);
-                    if (check_Availability(board, pos))
+                    int k = getRandomCornerMoves(board);
+                    if (k != 0)
                     {
-                        Play(board, cLetter, pos);
+                        Play(board, cLetter, k);
                         PrintBoard(board);
+                    }
+                    else if (k == 0)
+                    {
+                        if (check_Availability(board, 5))
+                        {
+                            Play(board, cLetter, k);
+                            PrintBoard(board);
+                        }
+                        else
+                        {
+                            Random rn = new Random();
+                            pos = rn.Next(1, 10);
+                            if (check_Availability(board, pos))
+                            {
+                                Play(board, cLetter, pos);
+                                PrintBoard(board);
+                            }
+                        }
                     }
                     else
                     {
@@ -152,6 +170,19 @@ namespace TicTacToeGame
                 PrintBoard(board);
             }
 
+        }
+
+        public int getRandomCornerMoves(char[] board)
+        {
+            int[] cornerList = { 1, 3, 7, 9 };
+            for (int i = 0; i < cornerList.Length; i++)
+            {
+                if (check_Availability(board, cornerList[i]))
+                {
+                    return cornerList[i];
+                }
+            }
+            return 0;
         }
 
 
