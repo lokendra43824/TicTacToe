@@ -4,6 +4,7 @@ using System.Globalization;
 namespace TicTacToeGame
 {
     public enum Player { USER, COMPUTER };
+    public enum GameStatus { WON, FULL_BOARD, CONTINUE };
     class Program
     {
         static void Main(string[] args)
@@ -21,24 +22,38 @@ namespace TicTacToeGame
             }
             Console.WriteLine("Player's Letter = " + pLetter);
             Console.WriteLine("Computer's Letter = " + cLetter);
-
-
             t.PrintBoard(board);
-
 
             Player p = t.FirstPlayToss();
 
-            if (p == Player.USER)
+            bool gameOver = false;
+            GameStatus gstatus = t.CheckCurrentStatus(board, pLetter, cLetter);
+
+            while (!gameOver)
             {
-                t.MakePlayerMove(board, pLetter);
-                t.MakeComputerMove(board, cLetter, pLetter);
-            }
-            else
-            {
-                t.MakeComputerMove(board, cLetter, pLetter);
-                t.MakePlayerMove(board, pLetter);
+                if (p == Player.USER)
+                {
+                    t.MakePlayerMove(board, pLetter);
+                    gstatus = t.CheckCurrentStatus(board, pLetter, cLetter);
+                    p = Player.COMPUTER;
+                }
+                else
+                {
+                    t.MakeComputerMove(board, cLetter, pLetter);
+                    gstatus = t.CheckCurrentStatus(board, pLetter, cLetter);
+                    p = Player.USER;
+                }
+
+                if (gstatus != GameStatus.CONTINUE)
+                {
+                    gameOver = true;
+                }
             }
 
+            if (gstatus == GameStatus.WON)
+            {
+                t.WhoWon(board, pLetter, cLetter);
+            }
         }
     }
 
@@ -250,22 +265,26 @@ namespace TicTacToeGame
             return isWinner;
         }
 
-        public void WhoWon(char[] board, char pLetter, char cLetter)
+        public Player WhoWon(char[] board, char pLetter, char cLetter)
         {
             bool checkPlayerWinner = CheckIsWinner(board, pLetter);
             bool checkComputerWinner = CheckIsWinner(board, cLetter);
+            Player p = 0;
             if (checkPlayerWinner == true)
             {
                 Console.WriteLine("YOU WON!!!");
+                p = Player.USER;
             }
             if (checkComputerWinner == true)
             {
                 Console.WriteLine("Computer Won!");
+                p = Player.COMPUTER;
             }
             else if (checkComputerWinner == false && checkPlayerWinner == false)
             {
                 Console.WriteLine("This is a Tie");
             }
+            return p;
 
         }
 
@@ -295,7 +314,6 @@ namespace TicTacToeGame
             return pos;
         }
 
-
         public char[] BoardCopy(char[] board)
         {
             char[] boardCopy = new char[10];
@@ -304,5 +322,34 @@ namespace TicTacToeGame
             return boardCopy;
         }
 
+        public bool IsBoardFull(char[] board)
+        {
+            bool val = true;
+            for (int i = 0; i < board.Length; i++)
+            {
+                if (board[i] == ' ')
+                {
+                    val = false;
+                }
+            }
+            return val;
+        }
+
+        public GameStatus CheckCurrentStatus(char[] board, char pLetter, char cLetter)
+        {
+            bool isFull = IsBoardFull(board);
+            if (isFull)
+            {
+                return GameStatus.FULL_BOARD;
+            }
+            else if (CheckIsWinner(board, pLetter) || CheckIsWinner(board, cLetter))
+            {
+                return GameStatus.WON;
+            }
+            else
+            {
+                return GameStatus.CONTINUE;
+            }
+        }
     }
 }
